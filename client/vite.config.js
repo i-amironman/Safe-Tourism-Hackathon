@@ -9,7 +9,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const API_URL = process.env.VITE_API_URL || 'http://localhost:3000';
 
 export default defineConfig({
-  root: path.resolve(__dirname),
   plugins: [react({
     include: '**/*.{jsx,tsx}',
   })],
@@ -18,6 +17,9 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
       '@assets': path.resolve(__dirname, '../attached_assets'),
     },
+  },
+  build: {
+    outDir: 'dist'
   },
   server: {
     host: '0.0.0.0',
