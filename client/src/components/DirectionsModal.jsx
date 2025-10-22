@@ -5,6 +5,7 @@ import { Input } from './ui/input';
 import { Card, CardContent } from './ui/card';
 import { Navigation, MapPin, Clock, AlertCircle, Route, Shield, Navigation2 } from 'lucide-react';
 import DirectionsMap from './DirectionsMap';
+import API_CONFIG from '../config/api';
 
 export default function DirectionsModal({ isOpen, onClose, hospital, userLocation }) {
   const [startingPoint, setStartingPoint] = useState('');
@@ -39,7 +40,7 @@ export default function DirectionsModal({ isOpen, onClose, hospital, userLocatio
       };
 
       // Get directions from our route API
-      const routeResponse = await fetch('/route', {
+      const routeResponse = await fetch(`${API_CONFIG.baseURL}${API_CONFIG.endpoints.route}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

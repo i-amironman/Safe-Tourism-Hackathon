@@ -4,6 +4,7 @@ import SearchBar from '../components/SearchBar';
 import HospitalCard from '../components/HospitalCard';
 import Pagination from '../components/ui/pagination';
 import { geocode } from '../lib/geocode';
+import API_CONFIG from '../config/api';
 
 // 20 hospital types for filtering
 const HOSPITAL_TYPES = [
@@ -60,7 +61,7 @@ export default function Hospitals() {
 
       // Fetch hospitals from our backend API
       const response = await fetch(
-        `/places?lat=${location.lat}&lng=${location.lng}&type=hospital`
+        `${API_CONFIG.baseURL}${API_CONFIG.endpoints.places}?lat=${location.lat}&lng=${location.lng}&type=hospital`
       );
 
       if (!response.ok) {
