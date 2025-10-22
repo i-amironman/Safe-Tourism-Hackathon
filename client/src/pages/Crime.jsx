@@ -3,6 +3,7 @@ import { useState } from 'react';
 import SearchBar from '../components/SearchBar';
 import MapView from '../components/MapView';
 import { geocode } from '../lib/geocode';
+import API_CONFIG from '../config/api';
 
 export default function Crime() {
   const [crimeData, setCrimeData] = useState(null);
@@ -33,7 +34,7 @@ export default function Crime() {
 
       // Fetch crime data
       const response = await fetch(
-        `http://localhost:5000/crime?lat=${location.lat}&lng=${location.lng}`
+        `${API_CONFIG.baseURL}/crime?lat=${location.lat}&lng=${location.lng}`
       );
 
       if (!response.ok) {

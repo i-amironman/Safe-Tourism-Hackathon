@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import API_CONFIG from '../config/api';
 
 // Fix Leaflet's default icon issue with webpack
 delete L.Icon.Default.prototype._getIconUrl;
@@ -400,7 +401,7 @@ export default function DirectionsMap({ startCoords, endCoords, routeGeometry, h
       const crimePromises = samplePoints.map(async (point) => {
         try {
           const response = await fetch(
-            `http://localhost:5000/crime?lat=${point.lat}&lng=${point.lng}`
+            `${API_CONFIG.baseURL}/crime?lat=${point.lat}&lng=${point.lng}`
           );
           
           if (response.ok) {

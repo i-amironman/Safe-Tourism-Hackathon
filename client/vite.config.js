@@ -6,6 +6,8 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+const API_URL = process.env.VITE_API_URL || 'http://localhost:3000';
+
 export default defineConfig({
   root: path.resolve(__dirname),
   plugins: [react({
@@ -21,15 +23,15 @@ export default defineConfig({
     host: '0.0.0.0',
     port: 5000,
     proxy: {
-      '/auth': 'http://localhost:3000',
-      '/places': 'http://localhost:3000',
-      '/crime': 'http://localhost:3000',
-      '/route': 'http://localhost:3000',
-      '/user': 'http://localhost:3000',
-      '/health': 'http://localhost:3000',
-      '/api': 'http://localhost:3000',
-      '/api/hotel-images': 'http://localhost:3000',
-      '/api/hospital-images': 'http://localhost:3000',
+      '/auth': API_URL,
+      '/places': API_URL,
+      '/crime': API_URL,
+      '/route': API_URL,
+      '/user': API_URL,
+      '/health': API_URL,
+      '/api': API_URL,
+      '/api/hotel-images': API_URL,
+      '/api/hospital-images': API_URL,
     }
   }
 });

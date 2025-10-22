@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
 import axios from 'axios';
+import API_CONFIG from '../config/api';
 
 export default function AuthModal({ onClose, onAuthSuccess }) {
   const [isLogin, setIsLogin] = useState(true);
@@ -46,7 +47,7 @@ export default function AuthModal({ onClose, onAuthSuccess }) {
         ? { email: formData.email, password: formData.password }
         : { name: formData.name, email: formData.email, password: formData.password };
 
-      const response = await axios.post(`http://localhost:5000${endpoint}`, payload, {
+      const response = await axios.post(`${API_CONFIG.baseURL}${endpoint}`, payload, {
         withCredentials: true
       });
 

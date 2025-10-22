@@ -4,6 +4,7 @@ import SearchBar from '../components/SearchBar';
 import HotelCard from '../components/HotelCard';
 import Pagination from '../components/ui/pagination';
 import { geocode } from '../lib/geocode';
+import API_CONFIG from '../config/api';
 
 // Hotel amenity types for filtering
 const HOTEL_AMENITIES = [
@@ -48,7 +49,7 @@ export default function Hotels() {
       setUserLocation(location);
 
       const response = await fetch(
-        `http://localhost:5000/places?lat=${location.lat}&lng=${location.lng}&type=hotel`
+        `${API_CONFIG.baseURL}/places?lat=${location.lat}&lng=${location.lng}&type=hotel`
       );
 
       if (!response.ok) {

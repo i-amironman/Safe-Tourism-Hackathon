@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import AuthModal from './AuthModal';
 import { GlobalFooter } from './GlobalFooter';
+import API_CONFIG from '../config/api';
 
 export default function Layout() {
   const [showAuthModal, setShowAuthModal] = useState(false);
@@ -16,7 +17,7 @@ export default function Layout() {
 
   const checkAuth = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/auth/me', {
+      const response = await axios.get(`${API_CONFIG.baseURL}/auth/me`, {
         withCredentials: true
       });
       if (response.data.user) {
@@ -31,7 +32,7 @@ export default function Layout() {
 
   const handleLogout = async () => {
     try {
-      await axios.get('http://localhost:5000/auth/logout', {
+      await axios.get(`${API_CONFIG.baseURL}/auth/logout`, {
         withCredentials: true
       });
       setUser(null);

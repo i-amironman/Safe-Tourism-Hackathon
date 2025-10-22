@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
 import MapView from '../components/MapView';
 import { geocode } from '../lib/geocode';
+import API_CONFIG from '../config/api';
 // Popular Places Data (Top visited global destinations)
 const popularPlaces = [
   {
@@ -365,7 +366,7 @@ export default function Home() {
       }
 
       // Call route API
-      const response = await fetch('http://localhost:5000/route', {
+      const response = await fetch(`${API_CONFIG.baseURL}/route`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -435,7 +436,7 @@ export default function Home() {
               
               // Fetch crime data for this point
               const crimePromise = fetch(
-                `http://localhost:5000/crime?lat=${lat}&lng=${lng}`
+                `${API_CONFIG.baseURL}/crime?lat=${lat}&lng=${lng}`
               ).then(response => response.json())
                 .then(crimeData => ({
                   lat: lat,
@@ -542,7 +543,7 @@ export default function Home() {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/user/journeys', {
+      const response = await fetch(`${API_CONFIG.baseURL}/user/journeys`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',

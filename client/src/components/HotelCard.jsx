@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import HotelDirectionsModal from './HotelDirectionsModal';
+import API_CONFIG from '../config/api';
 
 function haversineDistance(lat1, lon1, lat2, lon2) {
   const R = 6371;
@@ -48,7 +49,7 @@ export default function HotelCard({ hotel, userLat, userLng }) {
       const hotelType = hotel.tags?.tourism || hotel.tags?.amenity || 'hotel';
       
       const response = await fetch(
-        `/api/hotel-images/search?hotelName=${encodeURIComponent(hotel.name)}&hotelType=${encodeURIComponent(hotelType)}`
+        `${API_CONFIG.baseURL}/api/hotel-images/search?hotelName=${encodeURIComponent(hotel.name)}&hotelType=${encodeURIComponent(hotelType)}`
       );
       
       if (response.ok) {
@@ -102,7 +103,7 @@ export default function HotelCard({ hotel, userLat, userLng }) {
   const handleAddToFavorites = async () => {
     setIsAddingFavorite(true);
     try {
-      const response = await fetch('http://localhost:5000/user/favorites', {
+      const response = await fetch(`${API_CONFIG.baseURL}/user/favorites`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
