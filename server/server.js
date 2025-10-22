@@ -23,10 +23,12 @@ app.use(cors({
   origin: (origin, callback) => {
     const allowedOrigins = [
       'http://localhost:5000',
-      'http://127.0.0.1:5000'
-    ];
+      'http://127.0.0.1:5000',
+      process.env.FRONTEND_URL
+    ].filter(Boolean);
+    
     // Allow Replit dev domains
-    if (!origin || allowedOrigins.includes(origin) || origin.includes('.replit.dev')) {
+    if (!origin || allowedOrigins.includes(origin) || origin.includes('.replit.dev') || origin.includes('.vercel.app')) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
@@ -40,10 +42,10 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: {
-    secure: false, // set to true in production with HTTPS
+    secure: process.env.NODE_ENV === 'production', // set to true in production with HTTPS
     httpOnly: true,
     maxAge: 24 * 60 * 60 * 1000, // 24 hours
-    sameSite: 'lax'
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
   }
 }));
 

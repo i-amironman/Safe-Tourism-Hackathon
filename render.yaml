@@ -1,0 +1,20 @@
+services:
+  # Backend Service (Node.js/Express)
+  - type: web
+    name: safe-tourism-api
+    env: node
+    rootDir: server
+    buildCommand: "npm install"
+    startCommand: "node server.js"
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: FOURSQUARE_API_KEY
+        sync: false
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        sync: false
+    healthCheckPath: /health
