@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
+import API_CONFIG from '@/config/api';
 import { 
   MapPin, 
   Calendar, 
@@ -38,7 +39,7 @@ export default function CountryDetail() {
   const fetchCountryDetails = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`/api/countries/${encodeURIComponent(countryName)}`);
+      const response = await fetch(`${API_CONFIG.baseURL}${API_CONFIG.endpoints.countries}/${encodeURIComponent(countryName)}`);
       if (!response.ok) {
         throw new Error('Country not found');
       }

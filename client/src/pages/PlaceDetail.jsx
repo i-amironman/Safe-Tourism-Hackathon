@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
+import API_CONFIG from '@/config/api';
 import { 
   MapPin, 
   Calendar, 
@@ -44,7 +45,7 @@ export default function PlaceDetail() {
   const fetchPlaceDetails = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`/api/popular-places/${placeId}`);
+      const response = await fetch(`${API_CONFIG.baseURL}${API_CONFIG.endpoints.popularPlaces}/${placeId}`);
       if (!response.ok) {
         throw new Error('Place not found');
       }

@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
+import API_CONFIG from '@/config/api';
 import {  
   MapPin, 
   Calendar, 
@@ -38,7 +39,7 @@ export default function CultureDetail() {
   const fetchCultureDetails = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`/api/cultures/${cultureId}`);
+      const response = await fetch(`${API_CONFIG.baseURL}${API_CONFIG.endpoints.cultures}/${cultureId}`);
       if (!response.ok) {
         throw new Error('Culture not found');
       }
